@@ -18,9 +18,7 @@ userRouter.post('/signup', async (req, res) => {
     const { email, password } = req.body;
     try {
 		const user1=await User.findOne({email})
-		if(!user1){
-		return	res.send({"msg":"PLease register first"})
-		}
+	
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = new User({ email, password: hashedPassword });
         await user.save();
